@@ -20,3 +20,11 @@ code {
   --ttt-background: #242526;
   --ttt-textColor: #fff;
 }
+
+.X {
+  color: blue !important;
+}
+
+.O {
+  color: red !important;
+}

@@ -9,16 +9,15 @@ export const ButtonStyled = styled(Button)`
 
   .MuiButton-label {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   @media screen and (max-width: 768px) {
-    width: 40px;
-    height: 40px;
-  }
-
-  @media screen and (max-width: 600px) {
     width: 30px;
     height: 30px;
+
+    .MuiButton-label {
+      font-size: 16px;
+    }
   }
 `;
