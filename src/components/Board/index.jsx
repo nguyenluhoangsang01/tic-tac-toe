@@ -1,14 +1,11 @@
+import { Icon, IconButton } from "@material-ui/core";
 import { useEffect, useRef, useState } from "react";
+import { lines } from "../../lines";
 import Square from "../Square";
 import { BoardRow, BoardWrapper, Status } from "./Board.styles";
-import { lines } from "../../lines";
-import calculateWinner from "../../calculateWinner";
-import { Icon, IconButton } from "@material-ui/core";
 
-const Board = () => {
-  const [squares, setSquares] = useState(Array(9).fill(null));
+const Board = ({ setPause, winner, squares, setSquares, pause, time }) => {
   const [xIsNext, setXIsNext] = useState(true);
-  const winner = calculateWinner(squares);
   const squaresRef = useRef(squares);
 
   const handleClick = (i) => {
@@ -19,7 +16,14 @@ const Board = () => {
     squaresClone[i] = xIsNext ? "X" : "O";
     setSquares(squaresClone);
     setXIsNext(!xIsNext);
+
+    setPause(!pause);
   };
+
+  useEffect(() => {
+    if (time === 0) setXIsNext(!xIsNext);
+    return () => clearInterval(setXIsNext);
+  }, [time, xIsNext]);
 
   const renderSquare = (i) => (
     <Square
@@ -33,8 +37,6 @@ const Board = () => {
   useEffect(() => {
     squaresRef.current = squares;
   }, [squares]);
-
-  console.log({ squaresRef: squaresRef.current });
 
   return (
     <BoardWrapper>
